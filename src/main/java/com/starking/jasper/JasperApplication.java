@@ -1,22 +1,23 @@
 package com.starking.jasper;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.starking.jasper.services.JasperService;
 
 
 
-@SpringBootApplication
 public class JasperApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JasperApplication.class, args);
+	public static void main(String[] args) throws SQLException {
 		abrirJrxml("01");
 	}
 
-	private static void abrirJrxml(String string) {
+	private static void abrirJrxml(String numero) throws SQLException {
 		Connection connection = JdbcConnection.connection();
+		JasperService service = new JasperService();
+		service.abrirJasperViewer("relatorios/jrxml/funcionario-" + numero + ".jrxml", connection);
+		connection.close();
 	}
 
 }
