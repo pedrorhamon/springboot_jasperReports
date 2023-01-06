@@ -16,8 +16,8 @@ public class JasperApplication {
 	private static void abrirJrxml(String numero) throws SQLException {
 		Connection connection = JdbcConnection.connection();
 		JasperService service = new JasperService();
-		service.addParams("NIVEL_DESC", "JUNIOR");
-		service.addParams("UF", "SP");
+//		service.addParams("NIVEL_DESC", "JUNIOR");
+//		service.addParams("UF", "SP");
 		service.abrirJasperViewer("relatorios/jrxml/funcionario-" + numero + ".jrxml", connection);
 		connection.close();
 	}
