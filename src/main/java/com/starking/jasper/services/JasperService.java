@@ -1,6 +1,9 @@
 package com.starking.jasper.services;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -32,6 +36,19 @@ public class JasperService {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void exportarPDF(String jrxml, Connection connection, String saida) {
+		JasperReport report = compilarJrxml(jrxml);
+		try {
+			OutputStream out = new FileOutputStream(saida);
+			JasperPrint print = JasperFillManager.fillReport(report, this.params, connection);
+			JasperExportManager.exportReportToPdfStream(print, out);
+		}catch (JRException e) {
+			e.printStackTrace();
+		} catch(FileNotFoundException ex) {
+			ex.printStackTrace();
+		} 
 	}
 	
 	private JasperReport compilarJrxml(String arquivo) {
