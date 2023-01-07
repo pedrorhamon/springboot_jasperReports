@@ -38,6 +38,17 @@ public class JasperService {
 		}
 	}
 	
+	public void abrirPontoJasper(String jasperFile, Connection connection) {
+		try {
+			InputStream is = getClass().getClassLoader().getResourceAsStream(jasperFile);
+			JasperPrint print = JasperFillManager.fillReport(is, this.params, connection);
+			JasperViewer viewer = new JasperViewer(print);
+			viewer.setVisible(true);
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void exportarPDF(String jrxml, Connection connection, String saida) {
 		JasperReport report = compilarJrxml(jrxml);
 		try {
