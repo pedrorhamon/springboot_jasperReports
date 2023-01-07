@@ -20,7 +20,6 @@ public class JasperApplication {
 		JasperService service = new JasperService();
 		service.abrirPontoJasper("relatorios/jasper/funcionario-" + arquivo + ".jasper", connection);
 		connection.close();
-		
 	}
 
 //	private static void exportarParaPdf(String numero, String saida) throws SQLException {
