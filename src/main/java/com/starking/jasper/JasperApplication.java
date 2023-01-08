@@ -13,16 +13,27 @@ public class JasperApplication {
 //		abrirJrxml("01");
 //		exportarParaPdf("18", "E:\\dev\\projetos\\" + "jasper-" + UUID.randomUUID() + ".pdf");
 		//abrirJasper("09");
-		abrirJasperSubRelatorio("10");
+//		abrirJasperSubRelatorio("10");
+		abrirJrxmlSubRelatorio("10");
 	}
 	
-	private static void abrirJasperSubRelatorio(String arquivo) throws SQLException {
-		Connection connection = JdbcConnection.connection();
-		JasperService service = new JasperService();
-		service.addParams("SUB_REPORT_DIR", "relatorios/jasper/");
-		service.abrirPontoJasper("relatorios/jasper/funcionario-" + arquivo + ".jasper", connection);
-		connection.close();
-	}
+	private static void abrirJrxmlSubRelatorio(String numero) throws SQLException {
+	Connection connection = JdbcConnection.connection();
+	JasperService service = new JasperService();
+
+	service.abrirJrmxlSubReport("relatorios/jrxml/funcionario-" + numero + ".jrxml"
+			,"relatorios/jrxml/funcionario-" + numero + "-subfone.jrxml", 
+			connection);
+	connection.close();
+}
+	
+//	private static void abrirJasperSubRelatorio(String arquivo) throws SQLException {
+//		Connection connection = JdbcConnection.connection();
+//		JasperService service = new JasperService();
+//		service.addParams("SUB_REPORT_DIR", "relatorios/jasper/");
+//		service.abrirPontoJasper("relatorios/jasper/funcionario-" + arquivo + ".jasper", connection);
+//		connection.close();
+//	}
 
 //	private static void abrirJasper(String arquivo) throws SQLException {
 //		Connection connection = JdbcConnection.connection();
