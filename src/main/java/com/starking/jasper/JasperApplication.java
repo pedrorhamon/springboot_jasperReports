@@ -12,15 +12,24 @@ public class JasperApplication {
 	public static void main(String[] args) throws SQLException {
 //		abrirJrxml("01");
 //		exportarParaPdf("18", "E:\\dev\\projetos\\" + "jasper-" + UUID.randomUUID() + ".pdf");
-		abrirJasper("09");
+		//abrirJasper("09");
+		abrirJasperSubRelatorio("10");
 	}
-
-	private static void abrirJasper(String arquivo) throws SQLException {
+	
+	private static void abrirJasperSubRelatorio(String arquivo) throws SQLException {
 		Connection connection = JdbcConnection.connection();
 		JasperService service = new JasperService();
+		service.addParams("SUB_REPORT_DIR", "relatorios/jasper/");
 		service.abrirPontoJasper("relatorios/jasper/funcionario-" + arquivo + ".jasper", connection);
 		connection.close();
 	}
+
+//	private static void abrirJasper(String arquivo) throws SQLException {
+//		Connection connection = JdbcConnection.connection();
+//		JasperService service = new JasperService();
+//		service.abrirPontoJasper("relatorios/jasper/funcionario-" + arquivo + ".jasper", connection);
+//		connection.close();
+//	}
 
 //	private static void exportarParaPdf(String numero, String saida) throws SQLException {
 //		Connection connection = JdbcConnection.connection();
